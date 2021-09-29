@@ -37,6 +37,7 @@ export function stringifyDatabase (database: Database, config: Config): string {
     }
     template[table.schema].tables.push(table)
   }
+  database.enums.sort((enumA, enumB) => enumA.name.localeCompare(enumB.name))
   for (let enumm of database.enums) {
     if (template[enumm.schema] === undefined) {
       template[enumm.schema] = { tables: [], enums: [] }
