@@ -10,6 +10,7 @@ export default class implements AdapterInterface {
       .select('pg_enum.enumlabel AS value')
       .join('pg_enum', 'pg_enum.enumtypid', 'pg_type.oid')
       .join('pg_namespace', 'pg_namespace.oid', 'pg_type.typnamespace')
+      .orderBy('pg_enum.enumsortorder') // HACK: this is not the right solution
     if (config.schemas?.length > 0)
       query.whereIn('pg_namespace.nspname', config.schemas)
     
